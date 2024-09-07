@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>news</title>
+</head>
+
+<body>
+    <label for="input">Enter News Topic</label>
+    <input type="text" name="" id="input" placeholder="news of ...">
+    <button onclick="getNews()">FETCH</button>
+   <h1><div id="Headline"></div></h1> 
+    <span id="para"></span><a id="link">read more</a>
+    <img src="" id="image" alt="">
+    
+</body>
+<script>
+    let headline = document.getElementById("Headline")
+    let para = document.getElementById("para")
+    let l = document.getElementById('link')
+    let img=document.getElementById("image")
+    async function getNews() {
+        let query = document.getElementById("input")
+        await fetch(`https://newsapi.org/v2/everything?q=${query.value}&apiKey=b9e01e893a7c40e8b6ed48449be5898b`)
+            .then((data) => {
+                return data.json()
+            }).then((data) => {
+                console.log(data['articles'][0]);
+                headline.textContent = data['articles'][0]['title']
+                para.textContent = data['articles'][0]['content']
+                l.href = data['articles'][0]['url']
+                img.src=data['articles'][0]['urlToImage']
+            })
+    }
+
+</script>
+
+</html>

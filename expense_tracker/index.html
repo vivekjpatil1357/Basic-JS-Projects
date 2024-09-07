@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+    <div class="flex h-auto items-center justify-center  ">
+        <div class="flex flex-col   border w-3/4 p-10 rounded-lg border-white  shadow-2xl">
+            <div class="">
+                <h1 class="text-3xl mb-6 drop-shadow-lg  font-bold">Expense Tracker</h1>
+                <form action="#" class="flex flex-col">
+                    <input type="text" required class="mt-4 h-8 border rounded-lg pl-3"
+                        placeholder="Expense Description" id="description">
+                    <select name="" required class="border mt-4 h-8 pl-3 rounded-lg" id="category">
+                        <option value="None">Select Category</option>
+                        <option value="Food">Food</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Others">Others</option>
+
+                    </select>
+                    <input type="number" required name="" class="border mt-4 h-8 pl-3" placeholder="Enter Amount"
+                        id="amount">
+                    <input type="submit" onclick="add_expense()" value="Add Expense"
+                        class="border mt-4 h-8 w-28 rounded-lg bg-sky-600 text-white cursor-pointer active:bg-sky-500 active:shadow-md"
+                        id="amount">
+                </form>
+            </div>
+            <div>
+                <h1 class="my-8 text-3xl font-bold drop-shadow-lg">Expense Summary</h1>
+                <table class="min-w-full border border-gray-300" id="table">
+                    <thead class="bg-lime-400">
+                        <tr>
+                            <th class="px-4 py-2 border border-gray-300">Description</th>
+                            <th class="px-4 py-2 border border-gray-300">Category</th>
+                            <th class="px-4 py-2 border border-gray-300">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let desc = document.getElementById("description")
+    let category = document.getElementById("category")
+    let amt = document.getElementById("amount")
+    let table = document.getElementById("table")
+    function add_expense() {
+        let row = document.createElement('tr')
+
+        let dcell = document.createElement('td')
+        dcell.textContent = desc.value
+        dcell.className = 'px-4 py-2 border border-gray-300'
+        row.appendChild(dcell)
+
+        let ccell = document.createElement('td')
+        ccell.textContent = category.value
+        ccell.className = 'px-4 py-2 border border-gray-300'
+        row.appendChild(ccell)
+
+        let acell = document.createElement('td')
+        acell.textContent = amt.value
+        acell.className = 'px-4 py-2 border border-gray-300'
+        row.appendChild(acell)
+        if (desc.value == '' || amt == '') {
+            return
+        }
+        if (category.value == 'None') {
+            alert("select category")
+            return
+        }
+        table.appendChild(row)
+    }
+</script>
+
+</html>

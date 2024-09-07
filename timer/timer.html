@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="flex items-center flex-col h-screen  font-bold  justify-center">
+        <div class="bg-gradient-to-r from-blue-200 to-cyan-200 text-7xl border border-transparent rounded-lg p-10 bg-red-100 shadow-xl mb-10 shadow-inner " id="time" ></div>
+        
+        <div class="text-4xl">FOR 2025</div>
+    </div>
+<script>
+    let time=new Date("2025-01-01T00:00:00")
+    let timer=document.getElementById("time")
+    function f(){
+        let cur=new Date()
+        let remaining=time-cur
+        let day= Math.floor(remaining / (24 * 60 * 60 * 1000))
+        let hour=Math.floor((remaining%(24*60*60*1000))/(1000*60*60))
+        let minutes=Math.floor((remaining%(1000*60*60))/(1000*60))
+        let sec=Math.floor((remaining%(1000*60))/(1000))
+        timer.innerText=`${day} days ${hour}:${minutes}:${sec} Remaining`
+        
+        setTimeout(f,1000)
+    }
+    f()
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+    <div class="h-screen flex flex-col bg-sky-200 items-center justify-center w-full">
+        <div>
+            <h1 class="text-6xl font-bold  drop-shadow-lg mb-20">TIC-TAC-TOE</h1>
+        </div>
+        <div id="board"
+            class=" shadow-2xl bg-white border border-4 border-gray-900 rounded-lg grid grid-cols-3 grid-rows-3 w-1/4  border border-black">
+            <div id="0" class="cell w-32 text-6xl flex items-center justify-center border h-28 border-black"></div>
+            <div id="1" class="w-32 cell text-6xl border h-28 flex items-center justify-center border-black"></div>
+            <div id="2" class="w-32 cell text-6xl border h-28 flex items-center justify-center border-black"></div>
+            <div id="3" class="w-32 cell text-6xl border h-28 flex items-center justify-center border-black"></div>
+            <div id="4" class="w-32 cell text-6xl border h-28 flex items-center justify-center border-black"></div>
+            <div id="5" class="w-32 cell text-6xl border h-28 flex items-center justify-center border-black"></div>
+            <div id="6" class="w-32 cell text-6xl border h-28 flex items-center justify-center border-black"></div>
+            <div id="7" class="w-32 cell text-6xl border h-28 flex items-center justify-center border-black"></div>
+            <div id="8" class="w-32 cell text-6xl border h-28 flex items-center justify-center border-black"></div>
+        </div>
+        <div>
+            <input type="button" id="btn"
+                class="mt-10 w-32 rounded-lg cursor-pointer active:bg-red-500 active:shadow-lg py-4 bg-red-600 text-white"
+                value="Clear Board">
+        </div>
+    </div>
+</body>
+<script>
+    let cells = document.querySelectorAll('.cell')
+    let w = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 4, 8], [2, 4, 6],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8]
+    ]
+    let cur = "X"
+    let btn = document.getElementById('btn')
+    btn.addEventListener("click", () => {
+        clear()
+    })
+    cells.forEach(element => {
+
+        element.addEventListener("click", () => {
+            clicked(element)
+        })
+    });
+
+    function winner() {
+        for (i of w) {
+            if (cells[i[0]].textContent != '' && cells[i[0]].textContent == cells[i[1]].textContent && cells[i[0]].textContent == cells[i[2]].textContent) {
+                console.log("match");
+                return true
+            }
+        }
+
+
+    }
+    function clicked(cell) {
+        if (cell.innerText != '') {
+            return
+        }
+        cell.innerText = cur
+
+        if (winner()) {
+            won(cur)
+
+        }
+        else {
+            if (draw()) {
+                setTimeout(() => {
+                    alert("Game Drawn")
+                    clear()
+                }, 100);
+            }
+
+        }
+
+        if (cur == "X") {
+            cur = "O"
+        }
+        else {
+            cur = 'X'
+        }
+    }
+    function won(ch) {
+        setTimeout(() => {
+            alert(ch + " won")
+            clear()
+        }, 100);
+    }
+    function draw() {
+        let x = 0
+
+        for (i of cells) {
+            if (i.textContent != '') {
+                x++
+            }
+        }
+        if (x == 9) {
+
+            return true
+        }
+    }
+    function clear() {
+        cells.forEach(element => {
+            element.textContent = ''
+        });
+    }
+
+
+
+</script>
+
+</html>

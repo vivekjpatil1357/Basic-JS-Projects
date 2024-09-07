@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="flex  flex-col items-center justify-center w-screen h-96">
+        <div class="border border-transparent p-10 shadow-lg rounded-lg bg-sky-300 w-3/4 flex flex-col items-center ">
+            <div class="text-3xl font-bold drop-shadow-lg ">
+                Guess Number Between 1 to 100
+            </div>
+            <div >
+                <form action="#" class="flex justify-center mt-10 gap-5">
+                    <label for="input">Enter Guess</label>
+                    <input id="input" required class="border border-black px-2 rounded-lg h-10" type="number">
+                    <input type="submit" id="btn" class="border button cursor-pointer px-2 bg-lime-700 w-32 rounded-lg active:bg-lime-800 active:shadow-md text-white" value="Submit">
+                </form>
+            </div>
+            <div class="mt-6 font-bold flex flex-col items-center">
+                <p id="headline" class="h-12 "> </p>
+                <p>Number of Guesses : <span id="guess" >0</span></p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let b=document.querySelector("body")
+    let input=document.getElementById("input")
+    let guess=document.getElementById("guess")
+    let btn=document.querySelector('#btn')
+    let headline=document.querySelector('#headline')
+    let ran;
+    window.onload=function (){
+        input.focus()
+        ran= Math.floor(Math.random() * 100) + 1
+        console.log(ran);
+        
+    }
+    btn.addEventListener("click",(e)=>{
+        if (input.value ==''){
+            return 
+        }
+        let x=parseInt(input.value)
+        console.log(x)
+        let count=parseInt(guess.innerText)
+        if (x==ran)
+        {
+            headline.classList.add("text-3xl")
+
+            headline.innerHTML="Congratulations !! You Guessed It Right in "+(count+1)
+            guess.innerText=0
+            
+        }
+        else if (x>ran){
+            headline.innerHTML="Guess Lower"
+
+        }
+        else if (x<ran){
+            headline.innerHTML="Guess Higher"
+        }
+        guess.innerText=count+1
+    })
+    
+</script>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do list</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
+    .lbl {
+        background: aqua;
+    }
+
+    .lst {
+        border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        padding: 0px 40px 0px 0px;
+
+        border-radius: 10px;
+        background-color: greenyellow;
+        align-self: flex-start;
+    }
+</style>
+
+<body>
+    <div>
+        <div class="border border-3 border-black flex justify-center ">
+            <div class="w-1/2 flex justify-center flex-col
+            items-center mt-20   border  p-10 text-xl">
+                <label for="input" class="mb-4">Add Task</label>
+                <input type="text" name="" id="input" required class="h-10 w-3/4 border border-black border-3">
+            </div>
+        </div>
+        <div class="flex justify-center mt-20 text-2xl">
+            <div class="w-96 border  p-10 shadow-inner">
+                <ul id="list" class="list-disc flex gap-3 flex-col">
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let ul = document.getElementById("list")
+    let input = document.getElementById("input")
+    input.addEventListener("keyup", (event) => {
+        if (event.key != "Enter") {
+            return
+        }
+        let l = document.createElement("input")
+        l.classList.add("ml-2")
+        l.type = "checkbox"
+        l.classList.add('mr-8')
+
+        let label = document.createElement("label")
+        label.appendChild(document.createTextNode(input.value))
+        label.classList.add('lst')
+        label.classList.add("lbl")
+        label.appendChild(l)
+        label.addEventListener("change", (event) => {
+            label.classList.toggle('lbl')
+            if (l.checked) {
+                label.style.background = "gray"
+            }
+            else {
+                label.style.background = "greenyellow"
+            }
+        })
+        input.value = ''
+        ul.appendChild(label)
+    })
+</script>
+
+</html>

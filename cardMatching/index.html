@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="flex items-center justify-center h-screen">
+        <div class="w-1/2  grid grid-cols-3 ">
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+            <div class="cursor-pointer border py-10 flex items-center justify-center bg-gray-400 rounded-lg m-2 cell">?
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let cells = document.querySelectorAll(".cell")
+    let pairs = shuffleArray([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8])
+    let first = ''
+    let second = ''
+    function opencard(ele) {
+        ele.style.background = "white"
+    }
+    function closecard(ele) {
+        ele.style.background = "gray"
+        ele.textContent = "?"
+    }
+    cells.forEach((element, i) => {
+        element.addEventListener("click", () => {
+            opencard(element)
+            element.textContent = pairs[i] + ''
+            x = check(element)
+            if (x == true) {
+                opencard(first)
+                opencard(second)
+                first = ''
+                second = ''
+            }
+            else if (x == false) {
+                setTimeout(() => {
+                    closecard(first)
+                    closecard(second)
+                    console.log(first);
+                    console.log(second);
+                    first = ''
+                    second = ''
+                }, 500);
+            }
+        })
+    });
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+    function check(element) {
+        if (first == '') {
+            first = element
+            return
+        }
+        else {
+            second = element
+            if (first.textContent == second.textContent) {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+    }
+</script>
+
+</html>
